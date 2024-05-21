@@ -1,0 +1,78 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Patient Profile";
+}
+
+<div class="text-center">
+
+
+        <div class="profile-container">
+            <div class="profile-header">
+                <h2>@Model.Patient.Name <span class="room-number">Room: @Model.Patient.RoomNumber</span></h2>
+                <button class="edit-button" onclick="editProfile()">Edit</button>
+            </div>
+            <div class="profile-details">
+                <div>
+                    <label for="birthdate">Birthdate:</label>
+                    <span id="birthdate">@Model.Patient.Birthdate.ToString("MM/dd/yyyy")</span>
+                </div>
+                <div>
+                    <label for="phone">Phone Number:</label>
+                    <span id="phone">@Model.Patient.PhoneNumber</span>
+                </div>
+                <div>
+                    <label for="insurance">Insurance Company:</label>
+                    <span id="insurance">@Model.Patient.InsuranceCompany</span>
+                </div>
+            </div>
+            <div class="medical-history">
+                <h3>Medical History</h3>
+                <div>
+                    <label for="allergies">Allergies:</label>
+                    <span id="allergies">@Model.Patient.MedicalHistory.Allergies</span>
+                </div>
+                <div>
+                    <label for="conditions">Medical Conditions:</label>
+                    <span id="conditions">@Model.Patient.MedicalHistory.Conditions</span>
+                </div>
+                <div>
+                    <label for="lastUpdate">Last Update:</label>
+                    <span id="lastUpdate">@Model.Patient.MedicalHistory.LastUpdate.ToString("MM/dd/yyyy")</span>
+                </div>
+            </div>
+
+            <div class="appointment-section">
+                <h3>Appointments</h3>
+                @if (Model.Patient.AppointmentDate != null)
+                {
+                    <div>
+                        <label for="appointmentDate">Next Appointment:</label>
+                        <span id="appointmentDate">@Model.Patient.AppointmentDate?.ToString("MM/dd/yyyy HH:mm")</span>
+                    </div>
+                }
+                <a href="/Appointments/Schedule" class="appointment-button">Arrange Appointment</a>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Patient.RoomNumber))
+            {
+                <div class="nurse-section">
+                    <h3>Nurse Section</h3>
+                    <div>
+                        <label for="nurseNotes">Nurse Notes:</label>
+                        <span id="nurseNotes">@Model.Patient.NurseNotes</span>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <script>
+            function editProfile() {
+                // Implement your edit functionality here.
+                // For example, you can redirect to an edit page or open a modal with edit fields.
+                alert("Edit button clicked. Implement edit functionality.");
+            }
+        </script>
+ 
+
+</div>
